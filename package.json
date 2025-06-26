@@ -5,10 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon ./src/index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.1"
+  "packageManager": "pnpm@10.11.1",
+  "dependencies": {
+    "mysql2": "^3.14.1"
+  }
 }
