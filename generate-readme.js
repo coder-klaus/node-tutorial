@@ -1,5 +1,9 @@
-const fs = require('fs');
-const path = require('path');
+import fs  from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url'
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // 递归获取 docs 目录下所有 md 文件（带子目录）
 function getDocsList(dir, base = 'vaults/docs') {
@@ -42,13 +46,38 @@ function generateReadme() {
   const docsDir = path.join(__dirname, 'vaults', 'docs');
   const notesDir = path.join(__dirname, 'vaults', 'notes');
 
-  const docs = getDocsList(docsDir);
+  // 读取现有 README.md 内容
+  let readmeContent = '';
+  if (fs.existsSync('README.md')) {
+    readmeContent = fs.readFileSync('README.md', 'utf8');
+  }
+
+  // 检查是否有"## 概述"标题
+  let hasOverview = /## 概述/.test(readmeContent);
+  let overviewHasContent = false;
+  if (hasOverview) {
+    // 检查概述下方是否有内容（不是空行）
+    const match = readmeContent.match(/## 概述\n([\s\S]*?)(\n## |$)/);
+    if (match && match[1].trim().length > 0) {
+      overviewHasContent = true;
+    }
+  }
+
+  let content = '';
+  if (!hasOverview) {
+    content += '## 概述\n';
+  } else {
+    // 保留原有概述部分
+    const match = readmeContent.match(/## 概述\n([\s\S]*?)(\n## |$)/);
+    if (match) {
+      content += '## 概述\n' + match[1];
+      if (!content.endsWith('\n')) content += '\n';
+    }
+  }
+
+  // 笔记部分
+  content += '\n\n\n## 笔记\n';
   const notes = getNotesList(notesDir);
-
-  let content = '## 概述\n数据库基础知识概览\n\n';
-
-  content += '## 笔记\n';
-  // 按子目录分组
   const notesByDir = {};
   notes.forEach(note => {
     if (!notesByDir[note.dir]) notesByDir[note.dir] = [];
@@ -67,8 +96,9 @@ function generateReadme() {
     }
   });
 
-  content += '\n## 教案\n';
-  // 按子目录分组
+  // 教案部分
+  content += '\n\n\n## 教案\n';
+  const docs = getDocsList(docsDir);
   const docsByDir = {};
   docs.forEach(doc => {
     if (!docsByDir[doc.dir]) docsByDir[doc.dir] = [];
