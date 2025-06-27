@@ -47,27 +47,7 @@ function generateReadme() {
 
   let content = '## 概述\n数据库基础知识概览\n\n';
 
-  content += '## 教案\n';
-  // 按子目录分组
-  const docsByDir = {};
-  docs.forEach(doc => {
-    if (!docsByDir[doc.dir]) docsByDir[doc.dir] = [];
-    docsByDir[doc.dir].push(doc.file);
-  });
-  Object.keys(docsByDir).forEach(dir => {
-    if (dir && dir !== '.') {
-      content += `  + ${dir}\n`;
-      docsByDir[dir].forEach(file => {
-        content += `    - [${file.replace(/\.md$/, '')}](./vaults/docs/${dir}/${file})\n`;
-      });
-    } else {
-      docsByDir[dir].forEach(file => {
-        content += `  + [${file.replace(/\.md$/, '')}](./vaults/docs/${file})\n`;
-      });
-    }
-  });
-
-  content += '\n## 笔记\n';
+  content += '## 笔记\n';
   // 按子目录分组
   const notesByDir = {};
   notes.forEach(note => {
@@ -83,6 +63,26 @@ function generateReadme() {
     } else {
       notesByDir[dir].forEach(file => {
         content += `  + [${file.replace(/\.md$/, '')}](./vaults/notes/${file})\n`;
+      });
+    }
+  });
+
+  content += '\n## 教案\n';
+  // 按子目录分组
+  const docsByDir = {};
+  docs.forEach(doc => {
+    if (!docsByDir[doc.dir]) docsByDir[doc.dir] = [];
+    docsByDir[doc.dir].push(doc.file);
+  });
+  Object.keys(docsByDir).forEach(dir => {
+    if (dir && dir !== '.') {
+      content += `  + ${dir}\n`;
+      docsByDir[dir].forEach(file => {
+        content += `    - [${file.replace(/\.md$/, '')}](./vaults/docs/${dir}/${file})\n`;
+      });
+    } else {
+      docsByDir[dir].forEach(file => {
+        content += `  + [${file.replace(/\.md$/, '')}](./vaults/docs/${file})\n`;
       });
     }
   });
