@@ -5,9 +5,10 @@
 
 
 
+
+
 ## 笔记
   + [001-基本使用](./vaults/notes/001-基本使用.md)
-  + [001-概述](./vaults/notes/001-概述.md)
   + [002-查询子句](./vaults/notes/002-查询子句.md)
   + [003-聚合函数](./vaults/notes/003-聚合函数.md)
   + [004-分组](./vaults/notes/004-分组.md)
