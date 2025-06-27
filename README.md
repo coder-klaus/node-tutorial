@@ -40,7 +40,7 @@
 | ------------- | -------------- |
 | [sql/concept](https://github.com/coder-klaus/node-tutorial/tree/sql/concept) | 数据库基本概念 |
 | [sql/dql](https://github.com/coder-klaus/node-tutorial/tree/sql/dql)           |     数据库查询语句           |
-|               |                |
+|    [sql/multi-table](https://github.com/coder-klaus/node-tutorial/tree/sql/multi-table)           |    数据库多表操作           |
 |               |                |
 |               |                |
 |               |                |
