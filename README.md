@@ -38,7 +38,7 @@
 
 | 分支          | 说明           |
 | ------------- | -------------- |
-| `sql/concept` | 数据库基本概念 |
+| [sql/concept](https://github.com/coder-klaus/node-tutorial/tree/sql/concept) | 数据库基本概念 |
 |               |                |
 |               |                |
 |               |                |
